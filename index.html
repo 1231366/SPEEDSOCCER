@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>Speed Soccer Gaia | Admin Control</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#8eff71",
+                "on-primary": "#0d6100",
+                "background": "#0e0e0e",
+                "surface-container-low": "#131313",
+                "surface-container-high": "#201f1f",
+                "outline-variant": "#494847",
+                "tertiary": "#88f6ff",
+                "error": "#ff7351"
+              },
+              fontFamily: {
+                "headline": ["Space Grotesk"],
+                "body": ["Inter"]
+              }
+            }
+          }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel { background: rgba(38, 38, 38, 0.4); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+        body { background-color: #0e0e0e; color: #ffffff; -webkit-tap-highlight-color: transparent; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="antialiased font-body overflow-x-hidden">
+
+    <nav class="lg:hidden fixed bottom-0 left-0 right-0 bg-[#0e0e0e]/80 backdrop-blur-xl border-t border-white/10 z-[100] px-6 py-3 flex justify-between items-center shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+        <a href="index.html" class="flex flex-col items-center gap-1 text-primary">
+            <span class="material-symbols-outlined text-2xl">dashboard</span>
+            <span class="text-[9px] font-bold uppercase">Home</span>
+        </a>
+        <a href="agenda.html" class="flex flex-col items-center gap-1 text-gray-500">
+            <span class="material-symbols-outlined text-2xl">calendar_month</span>
+            <span class="text-[9px] font-bold uppercase">Agenda</span>
+        </a>
+        <a href="reserva.html" class="bg-primary text-black w-14 h-14 rounded-2xl flex items-center justify-center -mt-12 shadow-[0_0_20px_rgba(142,255,113,0.4)] active:scale-90 transition-transform border-4 border-[#0e0e0e]">
+            <span class="material-symbols-outlined font-black text-3xl">add</span>
+        </a>
+        <a href="#" class="flex flex-col items-center gap-1 text-gray-500">
+            <span class="material-symbols-outlined text-2xl">group</span>
+            <span class="text-[9px] font-bold uppercase">Clientes</span>
+        </a>
+        <a href="#" class="flex flex-col items-center gap-1 text-gray-500">
+            <span class="material-symbols-outlined text-2xl">settings</span>
+            <span class="text-[9px] font-bold uppercase">Menu</span>
+        </a>
+    </nav>
+
+    <aside class="hidden lg:flex h-screen w-64 fixed left-0 top-0 border-r border-white/5 bg-[#0e0e0e] flex-col py-8 px-4 z-50">
+        <div class="mb-10 px-4">
+            <h1 class="text-2xl font-black tracking-tighter text-primary italic font-headline">SS GAIA</h1>
+            <p class="font-headline tracking-tight text-xs font-bold uppercase text-gray-500 mt-1">Admin Control</p>
+        </div>
+        <nav class="flex-1 space-y-2 no-scrollbar overflow-y-auto">
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary bg-[#131313] border-l-4 border-primary font-bold font-headline text-sm uppercase" href="index.html">
+                <span class="material-symbols-outlined">dashboard</span> Dashboard
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-500 hover:text-white hover:bg-[#262626] font-headline text-sm uppercase transition-all" href="agenda.html">
+                <span class="material-symbols-outlined">calendar_month</span> Agenda
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-500 hover:text-white hover:bg-[#262626] font-headline text-sm uppercase transition-all" href="reserva.html">
+                <span class="material-symbols-outlined">confirmation_number</span> Reservas
+            </a>
+        </nav>
+        <div class="mt-auto px-4">
+            <a href="reserva.html" class="w-full bg-primary text-black font-headline font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-[0_0_20px_rgba(142,255,113,0.3)]">
+                <span class="material-symbols-outlined font-bold">add_circle</span> NOVO JOGO
+            </a>
+        </div>
+    </aside>
+
+    <header class="fixed top-0 right-0 w-full lg:w-[calc(100%-16rem)] h-16 z-40 bg-[#0e0e0e]/60 backdrop-blur-xl flex items-center justify-between px-6 lg:px-8 border-b border-white/5">
+        <div class="lg:hidden text-primary font-black italic text-xl tracking-tighter">SS GAIA</div>
+        <div class="hidden lg:flex items-center bg-surface-container-low px-4 py-1.5 rounded-full border border-outline-variant/10 w-96">
+            <span class="material-symbols-outlined text-gray-500 text-xl">search</span>
+            <input class="bg-transparent border-none focus:ring-0 text-sm w-full text-white placeholder-gray-500" placeholder="Pesquisar..." type="text"/>
+        </div>
+        <div class="flex items-center gap-4">
+            <button class="text-gray-400 relative"><span class="material-symbols-outlined">notifications</span><span class="absolute top-0 right-0 w-2 h-2 bg-primary rounded-full"></span></button>
+            <div class="h-8 w-[1px] bg-white/10 hidden sm:block"></div>
+            <div class="flex items-center gap-3 cursor-pointer">
+                <div class="text-right hidden sm:block">
+                    <p class="text-xs font-bold text-white font-headline">ADMIN</p>
+                    <p class="text-[10px] text-primary uppercase font-bold tracking-widest">Master</p>
+                </div>
+                <div class="w-9 h-9 rounded-full border-2 border-primary overflow-hidden">
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkIYDRxdEwO4YurjGD4CICthgDaSn_fzqTjQP1Gz6hDt1tnQcDrDBbov3-dElw6VZkACG5aKHwr4GmIyfayqQs-QMEUDMPNRnfCkps9c-u2Pf4sg0BwI3Yn2Jkl27fiz_lMCnv8T0dtsMhbIXAAcoT5iMDKPgLKUxMdfeuzMFMtXrQ6JYJeoNM1u0ym1q5YbmhnwMCLOeAgztrXdJCkK3ngEwbOWq_5VEfptVFV6xfFNOyp22Ds9_3_RRKPyaxRvuflqM1iRg7iTua" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="ml-0 lg:ml-64 pt-20 px-4 lg:px-8 pb-32 lg:pb-12 min-h-screen">
+        <section class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+                <h2 class="text-3xl lg:text-5xl font-black font-headline tracking-tighter text-white uppercase italic leading-none">
+                    Tactical <span class="text-primary">Overview</span>
+                </h2>
+                <p class="text-gray-400 text-sm mt-2">Telemetry em tempo real Speed Soccer Gaia.</p>
+            </div>
+            <div class="bg-surface-container-low px-4 py-2 rounded-lg border border-white/5 self-start flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-sm font-bold">calendar_today</span>
+                <span class="text-[10px] font-headline font-bold uppercase tracking-tight">25 MAR, 2026</span>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 mb-8">
+            <div class="bg-surface-container-low p-4 lg:p-6 rounded-2xl border-l-4 border-primary">
+                <p class="text-[9px] font-bold uppercase tracking-widest text-gray-500 mb-1">Receita</p>
+                <h3 class="text-xl lg:text-3xl font-black font-headline">€4,280</h3>
+                <div class="mt-2 h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                    <div class="h-full bg-primary" style="width: 75%"></div>
+                </div>
+            </div>
+            <div class="bg-surface-container-low p-4 lg:p-6 rounded-2xl border-l-4 border-tertiary">
+                <p class="text-[9px] font-bold uppercase tracking-widest text-gray-500 mb-1">Reservas</p>
+                <h3 class="text-xl lg:text-3xl font-black font-headline">142</h3>
+                <div class="mt-2 h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                    <div class="h-full bg-tertiary" style="width: 60%"></div>
+                </div>
+            </div>
+            <div class="bg-surface-container-low p-4 lg:p-6 rounded-2xl border-l-4 border-primary">
+                <p class="text-[9px] font-bold uppercase tracking-widest text-gray-500 mb-1">Ocupação</p>
+                <h3 class="text-xl lg:text-3xl font-black font-headline">85%</h3>
+                <div class="mt-2 h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                    <div class="h-full bg-primary" style="width: 85%"></div>
+                </div>
+            </div>
+            <div class="bg-surface-container-low p-4 lg:p-6 rounded-2xl border-l-4 border-white">
+                <p class="text-[9px] font-bold uppercase tracking-widest text-gray-500 mb-1">Membros</p>
+                <h3 class="text-xl lg:text-3xl font-black font-headline">1,892</h3>
+                <div class="mt-2 flex -space-x-2">
+                    <div class="w-5 h-5 rounded-full bg-gray-600 border border-black text-[8px] flex items-center justify-center font-bold">+45</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 glass-panel rounded-3xl overflow-hidden border border-white/5">
+                <div class="p-6 flex items-center justify-between">
+                    <h4 class="font-headline font-black uppercase italic tracking-tighter text-lg">Próximos Jogos</h4>
+                    <a href="agenda.html" class="text-[10px] font-bold text-primary uppercase tracking-widest">Ver Tudo</a>
+                </div>
+
+                <div class="hidden lg:block overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-white/5 text-[10px] font-bold uppercase text-gray-500">
+                            <tr>
+                                <th class="px-6 py-4 tracking-widest">Cliente</th>
+                                <th class="px-6 py-4 tracking-widest">Campo / Hora</th>
+                                <th class="px-6 py-4 tracking-widest">Valor</th>
+                                <th class="px-6 py-4 tracking-widest">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-white/5">
+                            <tr class="hover:bg-white/5 transition-colors cursor-pointer" onclick="window.location.href='agenda.html'">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-[10px] font-bold text-primary">MS</div>
+                                        <p class="text-sm font-bold">Marcus Silva</p>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <p class="text-sm font-bold">Pitch Alpha</p>
+                                    <p class="text-[10px] text-gray-500 font-bold uppercase">18:00 - Hoje</p>
+                                </td>
+                                <td class="px-6 py-4 text-sm font-bold">€85.00</td>
+                                <td class="px-6 py-4">
+                                    <span class="px-2 py-1 rounded text-[9px] font-black uppercase bg-primary/10 text-primary border border-primary/20">Pago</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="lg:hidden space-y-3 p-4">
+                    <div class="bg-white/5 rounded-2xl p-4 border border-white/5" onclick="window.location.href='agenda.html'">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">MS</div>
+                                <div>
+                                    <p class="font-bold text-sm">Marcus Silva</p>
+                                    <p class="text-[10px] text-gray-500 uppercase font-black">Pitch Alpha</p>
+                                </div>
+                            </div>
+                            <span class="px-2 py-1 rounded-md text-[9px] font-black uppercase bg-primary text-black">Pago</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-3 border-t border-white/5">
+                            <span class="text-[11px] font-bold text-gray-400">18:00 - 19:30</span>
+                            <span class="font-black text-sm">€85.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel rounded-3xl border border-white/5 p-6">
+                <h4 class="font-headline font-black uppercase italic tracking-tighter text-lg mb-6">Peak Performance</h4>
+                <div class="flex items-end justify-between h-40 gap-2 mb-8">
+                    <div class="flex-1 bg-white/5 rounded-t-lg relative group">
+                        <div class="absolute bottom-0 w-full bg-primary/40 group-hover:bg-primary transition-all rounded-t-lg" style="height: 40%"></div>
+                    </div>
+                    <div class="flex-1 bg-white/5 rounded-t-lg relative group">
+                        <div class="absolute bottom-0 w-full bg-primary group-hover:bg-primary transition-all rounded-t-lg shadow-[0_0_15px_rgba(142,255,113,0.4)]" style="height: 95%"></div>
+                    </div>
+                    <div class="flex-1 bg-white/5 rounded-t-lg relative group">
+                        <div class="absolute bottom-0 w-full bg-primary/60 group-hover:bg-primary transition-all rounded-t-lg" style="height: 70%"></div>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5">
+                        <span class="text-[10px] font-bold uppercase text-gray-400">Jogos Ativos</span>
+                        <span class="font-black text-primary">12/14</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5">
+                        <span class="text-[10px] font-bold uppercase text-gray-400">Tempo Limpeza</span>
+                        <span class="font-black text-tertiary">8 min</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div class="bg-primary p-6 rounded-3xl flex justify-between items-center group cursor-pointer active:scale-[0.98] transition-all">
+                <div>
+                    <h5 class="font-headline font-black uppercase italic text-black text-xl">Quick Launch</h5>
+                    <p class="text-black/60 text-xs font-bold uppercase tracking-widest">Relatório Financeiro</p>
+                </div>
+                <span class="material-symbols-outlined text-black text-4xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </div>
+            <div class="bg-surface-container-low p-6 rounded-3xl border border-white/5 flex justify-between items-center">
+                <div>
+                    <h5 class="font-headline font-black uppercase italic text-white text-xl">System Status</h5>
+                    <p class="text-primary text-xs font-bold uppercase tracking-widest animate-pulse">All Systems Nominal</p>
+                </div>
+                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <div class="w-2 h-2 bg-primary rounded-full"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="hidden lg:flex fixed bottom-8 right-8 items-center gap-3">
+        <div class="bg-surface-container-high px-4 py-2 rounded-full border border-white/10 flex items-center gap-2 shadow-2xl">
+            <div class="w-2 h-2 bg-primary rounded-full animate-ping"></div>
+            <span class="text-[10px] font-bold uppercase tracking-widest text-white">System: Optimized</span>
+        </div>
+    </div>
+
+</body>
+</html>
