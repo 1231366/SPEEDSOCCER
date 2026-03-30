@@ -47,7 +47,7 @@ Every booking triggers a high-end, Dark Mode HTML email.
 
 > [!IMPORTANT]
 > **Email de Confirmação Profissional:**
-> ![Confirmação de Email](screenshots/emailconfirmação.png)
+> ![Confirmação de Email](screenshots/emailconfirmacao.png)
 
 ---
 
